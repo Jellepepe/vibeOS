@@ -206,11 +206,87 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.reload();
   });
 
-  // 6. Launch Initial Windows for the user demo
+  // 6. Launch Initial Windows for the user demo or specific view
+  const urlParams = new URLSearchParams(window.location.search);
+  const requestedView = urlParams.get('view');
+
   setTimeout(() => {
-    const studio = PreloadedApps.find(a => a.id === 'app_studio');
-    const settings = PreloadedApps.find(a => a.id === 'app_settings');
-    if (studio) studio.create(runtime);
-    if (settings) settings.create(runtime);
-  }, 200);
+    if (requestedView === 'start') {
+      startMenu.openMenu();
+    } else if (requestedView === 'spotlight') {
+      spotlight.open();
+      spotlight.inputEl.value = 'Wall Street Crypto & Stock Ticker XP';
+      spotlight.render();
+    } else if (requestedView === 'apps') {
+      const notepad = PreloadedApps.find(a => a.id === 'app_notepad');
+      const paint = PreloadedApps.find(a => a.id === 'app_paint');
+      const synth = PreloadedApps.find(a => a.id === 'app_synth');
+      const physics = PreloadedApps.find(a => a.id === 'app_physics');
+      if (notepad) {
+        const w1 = notepad.create(runtime);
+        w1.element.style.left = '40px';
+        w1.element.style.top = '40px';
+      }
+      if (paint) {
+        const w2 = paint.create(runtime);
+        w2.element.style.left = '320px';
+        w2.element.style.top = '100px';
+      }
+      if (synth) {
+        const w3 = synth.create(runtime);
+        w3.element.style.left = '640px';
+        w3.element.style.top = '50px';
+      }
+      if (physics) {
+        const w4 = physics.create(runtime);
+        w4.element.style.left = '520px';
+        w4.element.style.top = '220px';
+      }
+    } else if (requestedView === 'physics') {
+      const physics = PreloadedApps.find(a => a.id === 'app_physics');
+      if (physics) {
+        const win = physics.create(runtime);
+        win.element.style.left = '200px';
+        win.element.style.top = '60px';
+      }
+    } else if (requestedView === 'studio') {
+      const studio = PreloadedApps.find(a => a.id === 'app_studio');
+      if (studio) {
+        const win = studio.create(runtime);
+        win.element.style.left = '180px';
+        win.element.style.top = '60px';
+      }
+    } else if (requestedView === 'settings') {
+      const settings = PreloadedApps.find(a => a.id === 'app_settings');
+      if (settings) {
+        const win = settings.create(runtime);
+        win.element.style.left = '200px';
+        win.element.style.top = '60px';
+      }
+    } else if (requestedView === 'synth_app') {
+      const studio = PreloadedApps.find(a => a.id === 'app_studio');
+      if (studio) {
+        const w1 = studio.create(runtime);
+        w1.element.style.left = '40px';
+        w1.element.style.top = '40px';
+      }
+      runtime.launchNewApp({
+        title: 'Retro Wall Street Ticker XP',
+        prompt: 'A retro 1990s Wall Street Stock and Crypto Ticker with order book, market sentiment meter, and buy/sell buttons',
+        iconSvg: XPIcons.promptStudio,
+        width: 680,
+        height: 520
+      }).then(w2 => {
+        w2.element.style.left = '420px';
+        w2.element.style.top = '70px';
+      });
+    } else if (requestedView === 'desktop_clean') {
+      // Clean desktop with just icons
+    } else {
+      const studio = PreloadedApps.find(a => a.id === 'app_studio');
+      const settings = PreloadedApps.find(a => a.id === 'app_settings');
+      if (studio) studio.create(runtime);
+      if (settings) settings.create(runtime);
+    }
+  }, 300);
 });
