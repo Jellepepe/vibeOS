@@ -2,12 +2,10 @@
 
 <div align="center">
 
-![VibeOS Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=flat-square)
-![License](https://img.shields.io/badge/license-BSD--3--Clause-orange.svg?style=flat-square)
 ![Windows XP Luna](https://img.shields.io/badge/theme-Windows_XP_Luna-0055ea.svg?style=flat-square)
 ![Inference Engine](https://img.shields.io/badge/inference-vLLM_%2F_Qwen3.8-success.svg?style=flat-square)
 ![Runtime](https://img.shields.io/badge/runtime-Node.js-green.svg?style=flat-square)
-![Zero Latency Client JS](https://img.shields.io/badge/physics-60_FPS_Canvas-ff69b4.svg?style=flat-square)
+![License](https://img.shields.io/badge/license-BSD--3--Clause-orange.svg?style=flat-square)
 
 <p align="center">
   <strong>An authentic Windows XP Luna-styled desktop environment powered by realtime LLM application synthesis.</strong><br>
@@ -112,7 +110,7 @@ High-performance interactive physics simulation running directly in the browser 
          +-------------------------------+                     +-------------------------------+
          |    Client JS Engine (0ms)     |                     |        VibeLLMClient          |
          |  - Canvas 2D Animations       |                     |  - Formulates System Prompt   |
-         |  - Web Audio Oscillators      |                     |  - Targets ws01:8000 (vLLM)   |
+         |  - Web Audio Oscillators      |                     |  - Targets LLM API (vLLM)     |
          |  - Local Sliders & Toggles    |                     |  - SSE Streaming & Fallback   |
          +-------------------------------+                     +---------------+---------------+
                                                                                |
@@ -124,8 +122,8 @@ High-performance interactive physics simulation running directly in the browser 
                                                                                |
                                                                                v
                                                                +-------------------------------+
-                                                               |        vLLM GPU Cluster       |
-                                                               |    (Qwen 3.8)      |
+                                                               |   OpenAI compatible Endpoint  |
+                                                               |     (vLLM/Qwen 3.8)           |
                                                                +-------------------------------+
 ```
 
@@ -238,9 +236,7 @@ vibeOS/
 
 ## 🤝 Contributing
 
-Contributions are warmly welcomed!
-- Feel free to submit pull requests for new preloaded XP accessories (e.g. Minesweeper, Solitaire, Calculator, or Media Player).
-- Enhancements to the prompt synthesizer or DOM patcher are always appreciated.
+Contributions are warmly welcomed! This was a simple demo project to play around with purely generative interfaces, but feel free to mess with it.
 
 ---
 
