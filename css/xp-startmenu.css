@@ -1,0 +1,286 @@
+/* Windows XP Start Menu */
+#xp-start-menu {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 380px;
+  background: #ffffff;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  box-shadow: 2px -2px 10px rgba(0, 0, 0, 0.4);
+  z-index: 9500;
+  display: none;
+  flex-direction: column;
+  border: 1px solid #0055ea;
+  border-bottom: none;
+  overflow: hidden;
+}
+
+#xp-start-menu.open {
+  display: flex;
+}
+
+/* User Header Banner */
+.start-header {
+  height: 54px;
+  background: linear-gradient(to bottom, #1d61d5 0%, #3f8cf3 40%, #1d61d5 100%);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 10px;
+  border-bottom: 1px solid #0044c4;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.start-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 3px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.start-username {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+/* Search bar inside Start Menu */
+.start-search-bar {
+  padding: 6px 10px;
+  background: #f1efe2;
+  border-bottom: 1px solid #d4d0c8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.start-search-input {
+  flex: 1;
+  height: 24px;
+  border: 1px solid #7f9db9;
+  border-radius: 2px;
+  padding: 0 6px;
+  font-size: 11px;
+  outline: none;
+}
+
+.start-search-input:focus {
+  border-color: #0055ea;
+  box-shadow: 0 0 3px rgba(0, 85, 234, 0.5);
+}
+
+/* Two-Column Body */
+.start-body {
+  display: flex;
+  min-height: 340px;
+  max-height: 440px;
+  background: #ffffff;
+}
+
+/* Left Column - Pinned & Regular Apps */
+.start-left-pane {
+  flex: 1.2;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+  border-right: 1px solid #d4d0c8;
+}
+
+.start-section-title {
+  font-size: 10px;
+  font-weight: bold;
+  color: #707070;
+  text-transform: uppercase;
+  padding: 4px 6px 2px;
+}
+
+.start-app-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+}
+
+.start-app-item:hover {
+  background: var(--xp-selection);
+  color: #ffffff;
+}
+
+.start-app-item-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.start-app-item-icon svg,
+.start-app-item-icon img,
+.start-app-item-icon .desktop-icon-img {
+  width: 24px !important;
+  height: 24px !important;
+  max-width: 24px !important;
+  max-height: 24px !important;
+  margin: 0 !important;
+  filter: none !important;
+  display: block;
+}
+
+.start-app-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.start-app-item-title {
+  font-weight: bold;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.start-app-item-desc {
+  font-size: 10px;
+  color: #666666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.start-app-item:hover .start-app-item-desc {
+  color: #e0eaff;
+}
+
+.start-pin-btn {
+  display: none;
+  font-size: 11px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+
+.start-app-item:hover .start-pin-btn {
+  display: block;
+}
+
+.start-pin-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.start-divider {
+  height: 1px;
+  background: #d4d0c8;
+  margin: 6px 4px;
+}
+
+/* All Programs Button */
+.start-all-programs {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  border-top: 1px solid #d4d0c8;
+}
+
+.start-all-programs:hover {
+  background: var(--xp-selection);
+  color: #ffffff;
+}
+
+/* Right Column - Places & Settings */
+.start-right-pane {
+  flex: 1;
+  background: #d3e5fa;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-left: 1px solid #ffffff;
+}
+
+.start-place-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #00138c;
+}
+
+.start-place-item:hover {
+  background: var(--xp-selection);
+  color: #ffffff;
+}
+
+.start-place-item-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.start-place-item-icon svg,
+.start-place-item-icon img,
+.start-place-item-icon .desktop-icon-img {
+  width: 20px !important;
+  height: 20px !important;
+  max-width: 20px !important;
+  max-height: 20px !important;
+  margin: 0 !important;
+  filter: none !important;
+  display: block;
+}
+
+/* Bottom Footer */
+.start-footer {
+  height: 40px;
+  background: linear-gradient(to bottom, #3f8cf3 0%, #1d61d5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 10px;
+  gap: 12px;
+  border-top: 1px solid #0044c4;
+}
+
+.start-footer-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 11px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.start-footer-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

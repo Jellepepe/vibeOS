@@ -1,0 +1,268 @@
+/* Windows XP Luna UI Component Kit */
+/* Used by LLM in its generated HTML for apps */
+
+.xp-app-body {
+  background-color: #ece9d8;
+  font-family: Tahoma, "Segoe UI", Arial, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  padding: 10px;
+  margin: 0;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+.xp-app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+  padding: 6px;
+  gap: 6px;
+  background-color: #ece9d8;
+}
+
+/* XP Buttons */
+.xp-btn {
+  background: linear-gradient(to bottom, #ffffff 0%, #ece9d8 10%, #dcd7c5 90%, #d0cbba 100%);
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  padding: 3px 12px;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 #ffffff, 0 1px 2px rgba(0, 0, 0, 0.1);
+  outline: none;
+  min-height: 23px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.xp-btn:hover {
+  background: linear-gradient(to bottom, #ffffff 0%, #f4f2e8 10%, #e8e3d0 90%, #ddd7c4 100%);
+  border-color: #e59700;
+  box-shadow: inset 0 0 2px #ffc73b;
+}
+
+.xp-btn:active {
+  background: linear-gradient(to bottom, #c0bba8 0%, #dbd6c4 50%, #e2ded0 100%);
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.xp-btn-default {
+  border: 2px solid #0055ea;
+  font-weight: bold;
+}
+
+.xp-btn:disabled {
+  color: #888888;
+  text-shadow: 1px 1px 0 #ffffff;
+  border-color: #b5b5b5;
+  background: #ebeadb;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.xp-btn-danger {
+  border-color: #a00;
+  color: #900;
+}
+
+/* XP Form Inputs */
+.xp-input, .xp-textarea, .xp-select {
+  background: #ffffff;
+  border: 1px solid #7f9db9;
+  border-radius: 2px;
+  padding: 3px 6px;
+  font-family: Tahoma, sans-serif;
+  font-size: 11px;
+  color: #000000;
+  outline: none;
+  box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.xp-input:focus, .xp-textarea:focus, .xp-select:focus {
+  border-color: #0055ea;
+  box-shadow: inset 1px 1px 1px rgba(0,0,0,0.1), 0 0 3px rgba(0, 85, 234, 0.4);
+}
+
+.xp-textarea {
+  resize: vertical;
+}
+
+/* Group Box */
+.xp-groupbox {
+  border: 1px solid #d4d0c8;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 4px 0 8px 0;
+  background: transparent;
+}
+
+.xp-legend {
+  font-size: 11px;
+  font-weight: bold;
+  color: #003399;
+  padding: 0 4px;
+}
+
+/* Tabs */
+.xp-tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid #919b9c;
+  padding-left: 6px;
+  margin-top: 4px;
+}
+
+.xp-tab {
+  background: linear-gradient(to bottom, #ece9d8 0%, #dbd6c4 100%);
+  border: 1px solid #919b9c;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 4px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  color: #222;
+  position: relative;
+  top: 1px;
+}
+
+.xp-tab:hover {
+  background: #f7f5ed;
+}
+
+.xp-tab.active {
+  background: #ece9d8;
+  border-bottom: 1px solid #ece9d8;
+  font-weight: bold;
+  top: 1px;
+  padding-top: 5px;
+  box-shadow: inset 0 2px 0 #ff9900;
+}
+
+.xp-tab-content {
+  border: 1px solid #919b9c;
+  border-top: none;
+  padding: 10px;
+  background: #ece9d8;
+  border-radius: 0 0 3px 3px;
+}
+
+/* Progress Bar */
+.xp-progress {
+  height: 16px;
+  background: #ffffff;
+  border: 1px solid #7f9db9;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.15);
+}
+
+.xp-progress-bar {
+  height: 100%;
+  background: repeating-linear-gradient(
+    to right,
+    #32cd32,
+    #32cd32 8px,
+    #ece9d8 8px,
+    #ece9d8 10px
+  );
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -1px 0 rgba(0,0,0,0.2);
+  transition: width 0.3s ease;
+}
+
+/* Sliders */
+.xp-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #d4d0c8;
+  border: 1px solid #7f9db9;
+  border-radius: 3px;
+  outline: none;
+}
+
+.xp-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 18px;
+  background: linear-gradient(to bottom, #ece9d8, #d0cbba);
+  border: 1px solid #707070;
+  border-radius: 2px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/* List View / Table */
+.xp-listview {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  border: 1px solid #7f9db9;
+  font-size: 11px;
+}
+
+.xp-listview th {
+  background: linear-gradient(to bottom, #fcfbfa 0%, #ece9d8 100%);
+  border-right: 1px solid #d4d0c8;
+  border-bottom: 1px solid #919b9c;
+  padding: 4px 6px;
+  text-align: left;
+  font-weight: normal;
+  box-shadow: inset 0 1px 0 #fff;
+}
+
+.xp-listview td {
+  padding: 4px 6px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.xp-listview tr:hover td {
+  background-color: #e5f1fb;
+}
+
+.xp-listview tr.selected td {
+  background-color: var(--xp-selection);
+  color: #ffffff;
+}
+
+/* Status Bar Inside App */
+.xp-statusbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 6px;
+  background: #ece9d8;
+  border: 1px inset #fff;
+  border-radius: 1px;
+  font-size: 10px;
+  color: #555;
+  box-shadow: inset 1px 1px 1px rgba(0,0,0,0.05);
+}
+
+/* Badges & Tags */
+.xp-badge {
+  display: inline-block;
+  padding: 1px 5px;
+  font-size: 9px;
+  font-weight: bold;
+  border-radius: 2px;
+  background: #316ac5;
+  color: #ffffff;
+}
+
+.xp-radio-label, .xp-check-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  margin-bottom: 4px;
+}

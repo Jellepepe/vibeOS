@@ -1,0 +1,118 @@
+/* Windows XP Desktop */
+#xp-desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 30px);
+  background-image: url('../assets/bliss.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* Desktop Icon Grid */
+.desktop-icons-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 15px 20px;
+  height: calc(100% - 20px);
+  z-index: 1;
+}
+
+.desktop-icon {
+  width: 75px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.desktop-icon:hover {
+  background: rgba(49, 106, 197, 0.3);
+  border: 1px dotted rgba(255, 255, 255, 0.6);
+  padding: 3px;
+}
+
+.desktop-icon.selected {
+  background: rgba(49, 106, 197, 0.6);
+  border: 1px dotted rgba(255, 255, 255, 0.9);
+  padding: 3px;
+}
+
+.desktop-icon .desktop-icon-img,
+.desktop-icon svg {
+  width: 36px;
+  height: 36px;
+  margin-bottom: 4px;
+  filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.4));
+  pointer-events: none;
+}
+
+.desktop-icon-label {
+  font-size: 11px;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9), 0 0 3px rgba(0, 0, 0, 0.8);
+  word-break: break-word;
+  line-height: 1.2;
+  pointer-events: none;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+.desktop-icon.selected .desktop-icon-label {
+  background-color: var(--xp-selection);
+}
+
+/* Rubberband Drag Selection */
+#desktop-selection-box {
+  position: absolute;
+  border: 1px dotted #316ac5;
+  background-color: rgba(49, 106, 197, 0.25);
+  pointer-events: none;
+  display: none;
+  z-index: 99;
+}
+
+/* XP Context Menu */
+.xp-context-menu {
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid #716f64;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  padding: 2px;
+  z-index: 10000;
+  display: none;
+  min-width: 160px;
+}
+
+.xp-context-item {
+  padding: 4px 20px 4px 24px;
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.xp-context-item:hover {
+  background: var(--xp-selection);
+  color: #ffffff;
+}
+
+.xp-context-separator {
+  height: 1px;
+  background: #d4d0c8;
+  margin: 3px 1px;
+}

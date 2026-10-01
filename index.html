@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VibeOS - Windows XP Realtime LLM Operating System</title>
+  
+  <!-- Windows XP Luna Theme CSS Sheets -->
+  <link rel="stylesheet" href="css/xp-base.css">
+  <link rel="stylesheet" href="css/xp-desktop.css">
+  <link rel="stylesheet" href="css/xp-taskbar.css">
+  <link rel="stylesheet" href="css/xp-startmenu.css">
+  <link rel="stylesheet" href="css/xp-spotlight.css">
+  <link rel="stylesheet" href="css/xp-window.css">
+  <link rel="stylesheet" href="css/xp-uikit.css">
+</head>
+<body>
+
+  <!-- Desktop Surface -->
+  <div id="xp-desktop">
+    <!-- Desktop Icons Grid -->
+    <div id="desktop-icons-grid" class="desktop-icons-container"></div>
+
+    <!-- Rubberband Selection Box -->
+    <div id="desktop-selection-box"></div>
+  </div>
+
+  <!-- Window Resize Outline Ghost -->
+  <div id="xp-resize-ghost">
+    <div class="xp-resize-ghost-badge">640 × 480 px</div>
+  </div>
+
+  <!-- Desktop Context Menu -->
+  <div id="desktop-context-menu" class="xp-context-menu">
+    <div class="xp-context-item" id="ctx-new-app">
+      <span>✨</span> <strong>Synthesize New App (Spotlight)</strong>
+    </div>
+    <div class="xp-context-separator"></div>
+    <div class="xp-context-item" id="ctx-settings">
+      <span>⚙️</span> vLLM & Inference Settings
+    </div>
+    <div class="xp-context-item" id="ctx-refresh">
+      <span>🔄</span> Refresh Desktop
+    </div>
+  </div>
+
+  <!-- Windows XP Start Menu -->
+  <div id="xp-start-menu">
+    <!-- Header with user profile -->
+    <div class="start-header">
+      <div class="start-avatar">
+        <svg viewBox="0 0 32 32" width="32" height="32">
+          <circle cx="16" cy="12" r="7" fill="#0055ea"/>
+          <path d="M4 28 C4 21 9 19 16 19 C23 19 28 21 28 28 Z" fill="#0055ea"/>
+        </svg>
+      </div>
+      <div class="start-username">Administrator (VibeOS User)</div>
+    </div>
+
+    <!-- Integrated Search Bar -->
+    <div class="start-search-bar">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#555" stroke-width="2">
+        <circle cx="10" cy="10" r="7"/>
+        <line x1="15" y1="15" x2="21" y2="21"/>
+      </svg>
+      <input type="text" id="start-search-field" class="start-search-input" placeholder="Search or synthesize any app (e.g. Crypto Ticker)...">
+    </div>
+
+    <!-- Start Menu Two-Column Body -->
+    <div class="start-body">
+      <!-- Left Column: Pinned Applications -->
+      <div class="start-left-pane">
+        <div class="start-section-title">Pinned Applications</div>
+        <div id="start-pinned-list"></div>
+
+        <div class="start-all-programs" title="Open Spotlight search runner">
+          <span>All Programs & Synthesizer</span>
+          <span style="font-size:10px;">▶</span>
+        </div>
+      </div>
+
+      <!-- Right Column: System Locations & Settings -->
+      <div class="start-right-pane">
+        <div class="start-place-item" onclick="vibeOS.spotlight.open()">
+          <span class="start-place-item-icon">💻</span>
+          <span>My Computer</span>
+        </div>
+        <div class="start-place-item" onclick="vibeOS.spotlight.open()">
+          <span class="start-place-item-icon">📁</span>
+          <span>My Documents</span>
+        </div>
+        <div class="start-divider" style="margin:4px 0;"></div>
+        <div class="start-place-item" onclick="PreloadedApps.find(a=>a.id==='app_studio').create(vibeOS.runtime)">
+          <span class="start-place-item-icon">✨</span>
+          <span style="font-weight:bold;">Vibe App Studio</span>
+        </div>
+        <div class="start-place-item" onclick="PreloadedApps.find(a=>a.id==='app_settings').create(vibeOS.runtime)">
+          <span class="start-place-item-icon">⚙️</span>
+          <span>Control Panel & vLLM</span>
+        </div>
+        <div class="start-divider" style="margin:4px 0;"></div>
+        <div class="start-place-item" onclick="vibeOS.spotlight.open()">
+          <span class="start-place-item-icon">🔍</span>
+          <span>Search & Run...</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Start Menu Footer -->
+    <div class="start-footer">
+      <div class="start-footer-btn" onclick="alert('VibeOS Session active.')">
+        <span>🔒</span> Log Off
+      </div>
+      <div class="start-footer-btn" onclick="alert('Turn Off Computer: VibeOS will remain running for your session.')">
+        <span>⏻</span> Turn Off Computer
+      </div>
+    </div>
+  </div>
+
+  <!-- Windows XP Taskbar -->
+  <div id="xp-taskbar">
+    <!-- Start Button -->
+    <div id="xp-start-btn">
+      <span id="start-flag-slot"></span>
+      <span class="xp-start-text">start</span>
+    </div>
+
+    <!-- Quick Launch Toolbar -->
+    <div class="quick-launch-divider"></div>
+    <div class="quick-launch-container">
+      <button id="ql-show-desktop" class="quick-launch-btn" title="Show Desktop">
+        <svg viewBox="0 0 24 24" width="16" height="16"><rect x="3" y="3" width="18" height="18" fill="#e0e8f8" stroke="#003399" stroke-width="1.5"/><rect x="5" y="5" width="14" height="12" fill="#7fa6e8"/><line x1="3" y1="21" x2="21" y2="21" stroke="#003399" stroke-width="2"/></svg>
+      </button>
+      <button id="ql-spotlight" class="quick-launch-btn" title="Spotlight Search (Win+Space)">
+        <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="10" cy="10" r="6" stroke="#003399" stroke-width="2" fill="none"/><line x1="14" y1="14" x2="20" y2="20" stroke="#cc0000" stroke-width="2.5"/></svg>
+      </button>
+      <button id="ql-studio" class="quick-launch-btn" title="Vibe App Studio">
+        <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="9" fill="#8a2be2"/><polygon points="12,5 14,10 19,12 14,14 12,19 10,14 5,12 10,10" fill="#ffe066"/></svg>
+      </button>
+      <button id="ql-settings" class="quick-launch-btn" title="vLLM Inference Settings">
+        <svg viewBox="0 0 24 24" width="16" height="16"><circle cx="12" cy="12" r="8" fill="#d0d4dc" stroke="#485060" stroke-width="1.5"/><circle cx="12" cy="12" r="3" fill="#485060"/></svg>
+      </button>
+    </div>
+    <div class="quick-launch-divider"></div>
+
+    <!-- Running Windows Taskbar Tabs -->
+    <div id="taskbar-windows-list"></div>
+
+    <!-- System Tray / Notification Area -->
+    <div id="xp-system-tray">
+      <!-- vLLM Status Badge -->
+      <div id="tray-vllm-badge" class="tray-status-badge" title="vLLM Connection Status">
+        <span class="tray-status-dot"></span>
+        <span class="tray-status-text">ws01:8000</span>
+      </div>
+
+      <!-- Volume Icon -->
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="#ffffff" class="tray-icon" title="Sound Volume">
+        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+      </svg>
+
+      <!-- Digital Clock -->
+      <div id="xp-tray-clock">12:00 PM</div>
+    </div>
+  </div>
+
+  <!-- Spotlight-Style Search Modal (Win + Space) -->
+  <div id="xp-spotlight-modal">
+    <div class="spotlight-card">
+      <div class="spotlight-header">
+        <span>VibeOS Spotlight & AI Synthesizer (Qwen3.8)</span>
+        <button id="spotlight-close-btn" class="spotlight-close-btn">✕</button>
+      </div>
+
+      <div class="spotlight-input-wrapper">
+        <svg viewBox="0 0 24 24" class="spotlight-search-icon" fill="none" stroke="#0055ea" stroke-width="2.5">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="16.5" y1="16.5" x2="22" y2="22"/>
+        </svg>
+        <input type="text" id="spotlight-input-field" class="spotlight-input" placeholder="Type app name or prompt (e.g. Crypto Tracker, Pizza Terminal)...">
+        <span class="spotlight-kbd-hint">Esc to Close</span>
+      </div>
+
+      <!-- Dynamic Results -->
+      <div id="spotlight-results-list" class="spotlight-results"></div>
+
+      <!-- Instant Suggestions Chips -->
+      <div class="spotlight-suggestions">
+        <span style="font-size:10px; color:#555; margin-right:4px;">Quick Inventions:</span>
+        <button class="spotlight-chip">Crypto & Stock Ticker</button>
+        <button class="spotlight-chip">Pizza Express XP</button>
+        <button class="spotlight-chip">QuestMaster RPG Inventory</button>
+        <button class="spotlight-chip">Global Doppler Weather</button>
+        <button class="spotlight-chip">Retro 80s Synthesizer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Scripts -->
+  <script src="js/icons.js"></script>
+  <script>
+    // Insert XP flag icon into start button
+    document.getElementById('start-flag-slot').innerHTML = XPIcons.flag;
+  </script>
+  <script src="js/config.js"></script>
+  <script src="js/llm-client.js"></script>
+  <script src="js/window-manager.js"></script>
+  <script src="js/app-runtime.js"></script>
+  <script src="js/apps/preloaded-apps.js"></script>
+  <script src="js/start-menu.js"></script>
+  <script src="js/spotlight.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
