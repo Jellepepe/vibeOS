@@ -3,8 +3,8 @@
 const PreloadedApps = [
   {
     id: 'app_settings',
-    title: 'Control Panel & vLLM Settings',
-    desc: 'Configure ws01:8000 endpoint, model, and system parameters',
+    title: 'Control Panel & LLM Settings',
+    desc: 'Configure LLM endpoint, model, and system parameters',
     iconSvg: XPIcons.settings,
     isPinned: true,
     width: 580,
@@ -30,14 +30,14 @@ const PreloadedApps = [
                   <td style="width:140px; font-weight:bold;">vLLM Endpoint URL:</td>
                   <td>
                     <input type="text" id="cfg-endpoint" class="xp-input" value="${cfg.endpoint}" style="width:100%; font-family:monospace;">
-                    <div style="font-size:10px; color:#555; margin-top:2px;">Default: <code>http://ws01:8000</code></div>
+                    <div style="font-size:10px; color:#555; margin-top:2px;">Default: <code>${VibeConfig.defaults.endpoint}</code></div>
                   </td>
                 </tr>
                 <tr>
                   <td style="font-weight:bold;">Model Name:</td>
                   <td>
                     <input type="text" id="cfg-model" class="xp-input" value="${cfg.model}" style="width:100%; font-family:monospace;">
-                    <div style="font-size:10px; color:#555; margin-top:2px;">Default: <code>qwen3.8-27b</code> (Loaded on ws01:8000 with vision & native tool calling)</div>
+                    <div style="font-size:10px; color:#555; margin-top:2px;">Default: <code>qwen3.8-27b</code> (Recommended for vLLM with vision & native tool calling)</div>
                   </td>
                 </tr>
                 <tr>
@@ -80,7 +80,7 @@ const PreloadedApps = [
                 </label>
                 <label class="xp-check-label">
                   <input type="checkbox" id="cfg-fallback" ${cfg.enableLocalSynthesizerFallback ? 'checked' : ''}>
-                  <strong>Enable Local Synthesizer Fallback:</strong> If ws01:8000 is unreachable, use built-in XP synthesizer so UI demo never freezes.
+                  <strong>Enable Local Synthesizer Fallback:</strong> If LLM endpoint is unreachable, use built-in XP synthesizer so UI demo never freezes.
                 </label>
 
                 <div style="display:flex; gap:20px; margin-top:6px;">
@@ -107,7 +107,7 @@ const PreloadedApps = [
 
             <div class="xp-statusbar" style="margin-top:auto;">
               <span>VibeOS Kernel 1.0</span>
-              <span>Target: ws01:8000 (Qwen3.8)</span>
+              <span>Target: ${cfg.endpoint.replace(/^https?:\/\//, '')} (${cfg.model})</span>
             </div>
           </div>
         `;
@@ -141,7 +141,7 @@ const PreloadedApps = [
                 }
               }
             } else {
-              statusEl.textContent = `Offline or unreachable (${data.error || 'Check LAN/host ws01'}).`;
+              statusEl.textContent = `Offline or unreachable (${data.error || 'Check host endpoint'}).`;
               statusEl.style.color = '#c00';
             }
           } catch (e) {
@@ -237,7 +237,7 @@ const PreloadedApps = [
 
           <div class="xp-statusbar" style="margin-top:auto;">
             <span>Ready for prompt input</span>
-            <span>Target: ws01:8000</span>
+            <span>Target: ${VibeConfig.get().endpoint.replace(/^https?:\/\//, '')}</span>
           </div>
         </div>
       `;
@@ -289,7 +289,7 @@ const PreloadedApps = [
           </div>
           <textarea name="notepad_content" class="xp-textarea" style="flex:1; width:100%; min-height:260px; font-family:var(--xp-mono); font-size:12px; line-height:1.4; padding:8px;">Welcome to VibeOS!
 
-This operating system generates dynamic, interactive Windows XP applications in real-time using LLM inference connected to Qwen3.8 on ws01:8000.
+This operating system generates dynamic, interactive Windows XP applications in real-time using LLM inference connected to ${VibeConfig.get().model} on ${VibeConfig.get().endpoint.replace(/^https?:\/\//, '')}.
 
 Try clicking the buttons above, or open the Start Menu / Spotlight (Win+Space) to synthesize any application you desire!</textarea>
           <div class="xp-statusbar">
@@ -527,7 +527,7 @@ Try clicking the buttons above, or open the Start Menu / Spotlight (Win+Space) t
           { f: 466.16, d: 0.25 }, // Bb4
           { f: 415.30, d: 0.25 }, // Ab4
           { f: 311.13, d: 0.35 }, // Eb4
-          { f: 466.16, d: 0.5  }  // Bb4
+          { f: 466.16, d: 0.5 }  // Bb4
         ];
         let delay = 0;
         notes.forEach(n => {

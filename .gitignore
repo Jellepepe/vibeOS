@@ -1,0 +1,13 @@
+# Local configuration overrides
+config.local.js
+config.local.json
+*.local.js
+*.local.json
+
+# Dependencies & build
+node_modules/
+
+# OS and temporary files
+.DS_Store
+*.log
+Thumbs.db

@@ -1,17 +1,23 @@
 // VibeOS System Configuration
 class VibeConfig {
-  static STORAGE_KEY = 'vibeos_config_v6';
+  static STORAGE_KEY = 'vibeos_config_v7';
 
-  static defaults = {
-    endpoint: 'http://ws01:8000',
-    model: 'qwen3.8-27b',
-    apiKey: '',
-    temperature: 0.7,
-    maxTokens: 4096,
-    useServerProxy: true,
-    enableLocalSynthesizerFallback: false,
-    autoRenderOnResize: true,
-    systemPrompt: `You are the VibeOS Realtime UI Synthesizer running on Windows XP.
+  static get localConfig() {
+    return (typeof window !== 'undefined' && window.VIBE_LOCAL_CONFIG) || {};
+  }
+
+  static get defaults() {
+    const local = this.localConfig;
+    return {
+      endpoint: local.endpoint || 'http://localhost:8000',
+      model: local.model || 'qwen3.8-27b',
+      apiKey: local.apiKey || '',
+      temperature: local.temperature ?? 0.7,
+      maxTokens: local.maxTokens ?? 4096,
+      useServerProxy: local.useServerProxy ?? true,
+      enableLocalSynthesizerFallback: local.enableLocalSynthesizerFallback ?? false,
+      autoRenderOnResize: local.autoRenderOnResize ?? true,
+      systemPrompt: local.systemPrompt || `You are the VibeOS Realtime UI Synthesizer.
 Your goal is to generate responsive, highly interactive, authentic Windows XP styled applications using HTML, inline styles, standard HTML elements, and client-side JavaScript.
 
 CRITICAL RULES:
@@ -88,14 +94,15 @@ CRITICAL RULES:
    - Modes: "replace", "append", "prepend", "text", "style" (with prop="propName").
    - This reduces generation from 1500 tokens down to 50 tokens and speeds up inference by 10x-30x!
    - Only return full <div class="xp-app-container"> if a completely new layout or page reset is required.`
-  };
+    };
+  }
 
   static get() {
     try {
       let saved = localStorage.getItem(this.STORAGE_KEY);
       if (!saved) {
-        // Migrate previous customizations (endpoint, model, apiKey) to v6 with updated system prompt
-        const prev = localStorage.getItem('vibeos_config_v5') || localStorage.getItem('vibeos_config_v4');
+        // Migrate previous customizations (endpoint, model, apiKey) to v7
+        const prev = localStorage.getItem('vibeos_config_v6') || localStorage.getItem('vibeos_config_v5') || localStorage.getItem('vibeos_config_v4');
         if (prev) {
           try {
             const parsed = JSON.parse(prev);
@@ -112,7 +119,7 @@ CRITICAL RULES:
             };
             this.save(migrated);
             return migrated;
-          } catch(e) {}
+          } catch (e) { }
         }
       }
       if (saved) {

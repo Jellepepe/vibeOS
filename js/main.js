@@ -89,16 +89,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const trayStatusDot = trayStatusBadge.querySelector('.tray-status-dot');
   const trayStatusText = trayStatusBadge.querySelector('.tray-status-text');
 
+  function getEndpointHost(endpoint) {
+    try {
+      const u = new URL(endpoint);
+      return u.host || 'localhost:8000';
+    } catch (e) {
+      return (endpoint || '').replace(/^https?:\/\//, '').split('/')[0] || 'localhost:8000';
+    }
+  }
+
+  const initialCfg = VibeConfig.get();
+  trayStatusText.textContent = getEndpointHost(initialCfg.endpoint);
+
   async function checkConnection() {
     const health = await llmClient.checkHealth();
     const cfg = VibeConfig.get();
+    const hostLabel = getEndpointHost(cfg.endpoint);
     if (health.alive) {
       trayStatusDot.classList.remove('offline');
-      trayStatusText.textContent = 'ws01:8000';
+      trayStatusText.textContent = hostLabel;
       trayStatusBadge.title = `Connected to vLLM on ${cfg.endpoint} (${cfg.model})`;
     } else {
       trayStatusDot.classList.add('offline');
-      trayStatusText.textContent = cfg.enableLocalSynthesizerFallback ? 'Offline (Fallback)' : 'ws01 (Offline)';
+      trayStatusText.textContent = cfg.enableLocalSynthesizerFallback ? 'Offline (Fallback)' : `${hostLabel} (Offline)`;
       trayStatusBadge.title = `vLLM on ${cfg.endpoint} unreachable. Using local synthesizer fallback. Click to configure.`;
     }
   }

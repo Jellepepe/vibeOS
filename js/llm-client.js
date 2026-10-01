@@ -1,4 +1,4 @@
-// VibeOS LLM Client for vLLM (Qwen3.8 on ws01:8000)
+// VibeOS LLM Client for OpenAI compatible / vLLM
 class VibeLLMClient {
   constructor() {
     this.config = VibeConfig.get();
@@ -9,7 +9,7 @@ class VibeLLMClient {
 
   async checkHealth() {
     const proxyBase = window.location.protocol.startsWith('http') ? '' : 'http://localhost:3000';
-    
+
     // 1. Try local server proxy
     try {
       const res = await fetch(`${proxyBase}/api/llm/health?endpoint=${encodeURIComponent(this.config.endpoint)}`);
@@ -171,7 +171,7 @@ class VibeLLMClient {
       }
     }
 
-    // 2. If proxy failed or disabled, try direct fetch to ws01:8000
+    // 2. If proxy failed or disabled, try direct fetch to configured endpoint
     if (!response || !response.ok) {
       usedMethod = 'direct';
       const targetUrl = `${this.config.endpoint.replace(/\/+$/, '')}/v1/chat/completions`;
@@ -287,7 +287,7 @@ class VibeLLMClient {
         const parsed = JSON.parse(lastMsg);
         promptText = parsed.action || parsed.prompt || lastMsg;
       }
-    } catch (e) {}
+    } catch (e) { }
 
     const lower = promptText.toLowerCase();
     const isResize = lower.includes('window was resized') || lower.includes('adaptively re-render');
@@ -356,7 +356,7 @@ class VibeLLMClient {
         </div>
         <div class="xp-statusbar">
           <span>Status: Market Live</span>
-          <span>Target: ws01:8000 (qwen3.8)</span>
+          <span>Target: ${this.config.endpoint.replace(/^https?:\/\//, '')} (${this.config.model})</span>
         </div>
       `;
     }
@@ -466,7 +466,7 @@ class VibeLLMClient {
         <legend>${title} - Synthesized Workspace</legend>
         <div style="margin-bottom:10px;">
           <p>Synthesized for prompt: <strong>"${promptText.slice(0, 100).replace(/"/g, '&quot;')}"</strong></p>
-          <p style="font-size:10px; color:#555; margin-top:2px;">Target inference: Qwen3.8 on <code>ws01:8000</code></p>
+          <p style="font-size:10px; color:#555; margin-top:2px;">Target inference: ${this.config.model} on <code>${this.config.endpoint}</code></p>
         </div>
         <div style="display:flex; gap:6px; margin-bottom:10px;">
           <input type="text" name="query" class="xp-input" value="Active process #402" style="flex:1;">
