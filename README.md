@@ -1,4 +1,4 @@
-# 🌄 VibeOS — Windows XP Realtime LLM Operating System
+# 🌄 VibeOS — A Generative UI Operating System Demo
 
 <div align="center">
 
@@ -10,7 +10,7 @@
 ![Zero Latency Client JS](https://img.shields.io/badge/physics-60_FPS_Canvas-ff69b4.svg?style=flat-square)
 
 <p align="center">
-  <strong>An authentic Windows XP Luna desktop environment powered by realtime LLM application synthesis.</strong><br>
+  <strong>An authentic Windows XP Luna-styled desktop environment powered by realtime LLM application synthesis.</strong><br>
   Prompt any idea into a living, responsive, interactive desktop application in seconds.
 </p>
 
@@ -22,7 +22,7 @@
 
 ![VibeOS Desktop](assets/screenshots/vibeos_desktop.png)
 
-> **VibeOS** revives the beloved Windows XP Luna interface and supercharges it with modern Artificial Intelligence. By integrating directly with local inference engines (such as **vLLM** serving **Qwen 3.8 / Qwen 2.5**), VibeOS dynamically synthesizes and renders interactive, multi-window software from natural language descriptions on the fly.
+> **VibeOS** is an exploration of **Generative UI** and real-time LLM application synthesis, directly inspired by **Steve Sanderson's**  "VibeOS / Hallucinated Operating System" demonstration. Instead of executing pre-compiled desktop software, VibeOS integrates directly with inference engines (such as local **vLLM** serving **Qwen 3.8**) to hallucinate and synthesize living, interactive, multi-window software on the fly from natural language prompts.
 
 ---
 
@@ -31,7 +31,7 @@
 - 🎨 **Authentic Windows XP Luna Shell**:
   - High-fidelity Luna blue titlebars with iconic Minimize, Maximize, and Close buttons.
   - Classic **Bliss** rolling green hills desktop background.
-  - Windows XP two-column Start Menu with user avatar, search, and pinned applications.
+  - Windows XP-style two-column Start Menu with user avatar, search, and pinned applications.
   - Taskbar with pressed states, quick-launch toolbar, active window grouping, system tray clock, and live vLLM status beacon.
 - ⚡ **Realtime LLM Application Synthesizer**:
   - Convert any prompt into a functional, styled XP application in real-time.
@@ -125,7 +125,7 @@ High-performance interactive physics simulation running directly in the browser 
                                                                                v
                                                                +-------------------------------+
                                                                |        vLLM GPU Cluster       |
-                                                               |    (Qwen 3.8 / Qwen 2.5)      |
+                                                               |    (Qwen 3.8)      |
                                                                +-------------------------------+
 ```
 
@@ -177,19 +177,12 @@ VibeOS supports deterministic layout testing via URL parameters:
 
 ## ⚙️ Connecting Your Own vLLM Server
 
-By default, VibeOS routes requests to `http://ws01:8000` with model `qwen3.8-27b`. You can connect any OpenAI-compatible server (e.g., vLLM, Ollama, LM Studio, or local API gateways):
+By default, VibeOS routes requests to `http://localhost:8000` with model `qwen3.8-27b`. You can connect any OpenAI-compatible server (e.g., vLLM, Ollama, LM Studio, or local API gateways):
 
-1. Launch your vLLM instance:
-   ```bash
-   python3 -m vllm.entrypoints.openai.api_server \
-     --model Qwen/Qwen2.5-Coder-32B-Instruct \
-     --host 0.0.0.0 \
-     --port 8000
-   ```
-2. Open **Control Panel** in VibeOS (via Start Menu or System Tray badge).
-3. Set your endpoint (e.g., `http://localhost:8000` or `http://ws01:8000`) and model name.
-4. Click **Test vLLM Connection**.
-5. Save settings — the system tray badge will immediately switch to green indicating an active link.
+1. Open **Control Panel** in VibeOS (via Start Menu or System Tray badge).
+2. Set your endpoint (e.g., `http://localhost:8000`) and model name.
+3. Click **Test vLLM Connection**.
+4. Save settings — the system tray badge will immediately switch to green indicating an active link.
 
 ---
 
@@ -248,6 +241,12 @@ vibeOS/
 Contributions are warmly welcomed!
 - Feel free to submit pull requests for new preloaded XP accessories (e.g. Minesweeper, Solitaire, Calculator, or Media Player).
 - Enhancements to the prompt synthesizer or DOM patcher are always appreciated.
+
+---
+
+## 💡 Acknowledgements & Prior Art
+
+This project is directly inspired by and builds upon the concepts from **Steve Sanderson's** demonstration of **VibeOS** — an exploration of agentic, hallucinated operating systems where user interfaces and application behaviors are generated on the fly by an LLM in response to user intent and interaction.
 
 ---
 
